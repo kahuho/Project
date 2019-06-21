@@ -1,0 +1,39 @@
+
+{% extends 'accounts/base.html' %}
+{% block main %}
+
+
+        <div class="row">
+            <h3 class="col-md-offset-1">Karibu Soko</h3>
+        {% for product in market %}
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail text-center">
+
+
+
+                    {% if product.image %}
+                  <img src="{{ product.image.url }}" class="img-responsive" alt="product image" style="height: 200px; width: available">
+                    {% else %}
+                    <p class="text-primary"> No Image</p>
+                    {% endif %}
+                    <br/>
+                    <h5 class="text-primary">{{ product.ProductName }}</h5>
+                    <ul>
+                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>Loacation {{ product.location }}</li>
+                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>Pricing is per {{ product.unitofsale }}</li>
+                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>Category {{ product.category }}</li>
+                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> </li>
+{#                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> 16M colors</li>#}
+{#                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Octa-core 1.7 GHz Cortex-</li>#}
+                    </ul>
+                    <h4 class="text-primary">{{ product.price   }} </h4>
+                    <a href="{% url 'single_product' product.id %}" class="btn btn-success btn-block text-white">View</a>
+
+                </div>
+
+            </div>
+            {% endfor %}
+        {% include "sell/pagination.html" %}
+
+      </div>
+{% endblock %}

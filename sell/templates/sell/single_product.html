@@ -1,0 +1,67 @@
+   {% extends 'accounts/base.html' %}
+    {% load static %}
+
+{% block style %}
+     <link rel="stylesheet" type="text/css" href="{% static "css/cart.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/font-awesome.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/tabbular.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "vendors/bootstrap-rating-master/bootstrap-rating.css" %}">
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block main %}
+<div class="container">
+        <!--item view start-->
+    <div class="row">
+            <div class="mart10">
+                <!--product view-->
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="product_wrapper">
+                            <img id="zoom_09" src="{{product.image.url }}" data-zoom-image="product.image.url }}" class="img-responsive" />
+                        </div>
+                    </div>
+                </div>
+                <!--individual product description-->
+                <div class="col-md-8">
+                    <h2 class="text-primary">{{ product.category }} </h2>
+                    <i class="fa fa-star text-primary"></i>
+                    <i class="fa fa-star text-primary"></i>
+                    <i class="fa fa-star text-primary"></i>
+                    <i class="fa fa-star text-primary"></i>
+                    <i class="fa fa-star-o text-primary"></i>
+                    <h3>Product Details</h3>
+                    <p>{{ product.ProductDescription }}</p>
+
+                    <div class="text-big4">Price: {{ product.price }}</div>
+                     <div class="text-big4">Contact: {{ product.user.profile.phone_number }}</div>
+
+                    <a href="{% url 'seller_profile' product.user.id %}" class="btn btn-primary btn-lg text-white">View Seller Profile</a>
+
+
+                </div>
+            </div>
+        </div>
+        <!--item view end-->
+
+    </div>
+    <br>
+<br>
+<br>
+{% endblock %}
+
+{% block style2 %}
+     <script type="text/javascript" src="{% static "js/elevatezoom.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/jquery.min.js"%}"></script>
+
+    <script type="text/javascript" src="{% static "vendors/bootstrap-rating-master/bootstrap-rating.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/cart.js" %}"></script>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block main %}
+
+
+
+<div  id="content" class="container-fluid">
+
+
+<div v-for="(record,index) in news"  v-if="index<10" class="box">
+
+    <div  class="box-header">
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-sm-8">
+                       <h3> <b>[[record.title]]</b></h3>
+
+            <h3>Content: [[record.content]]</h3>
+            <a :href="record.url" target="_blank"> <h3>Description: [[record.description]]</h3></a>
+            <h3>Published at: [[record.publishedAt]]</h3>
+                           <br>
+                <div class="row">
+                                <div class="col-sm-8"> <h1 class="pull-left">[[ record.author ]]</h1></div>
+                                <div class="col-sm-4 ">
+            <h3> [[record.source.name]]</h3>
+
+                                      <a :href="record.url" target="_blank" class="btn btn-success" >Link</a>
+                                </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-4">
+                <img  :src="[[record.urlToImage]]" class="img img-responsive"  style="height: 450px; width: 500px "/>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+</div>
+
+
+
+
+{% endblock %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script type="text/javascript" src="{% static "js/jquery.min.js"%}"></script>
+
+    <script type="application/javascript" >
+        var content=new Vue({
+            el:'#content',
+            delimiters:['[[',']]'],
+            data:{
+                news:[],
+            },
+            created:function () {
+
+                var me=this;
+        $.ajax({
+            url:"https://newsapi.org/v2/everything?q=agriculture&from=2019-05-23&to=2019-05-23&sortBy=popularity&apiKey=7afe78e453a64e3ca55b795fdf8f0f04",
+            success:function (results) {
+                me.news=results.articles;
+                console.log(results.articles)
+
+               // $.each(results.articles,function (key,value) {
+                 //                   console.log(value.author);
+//
+  //                  if (key==9){
+    //                   return false;
+      //              }
+        //        })
+
+            },
+            error:function (err) {
+                console.log(err)
+            }
+        })
+            },
+            methods:{
+
+            }
+
+        });
+
+    $(document).ready(function () {
+
+
+    })
+    </script>
+{% endblock %}
