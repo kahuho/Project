@@ -32,18 +32,22 @@ class UserRegistrationForm(UserCreationForm):
 
 
 #
-class UserEditForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('last_name', 'email')
+# class UserEditForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ('last_name', 'email')
 
 
-class ProfileEditForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ('profPic', 'date_of_birth', 'phone_number')
-        widgets ={
-            'date_of_birth': DatePickerInput(format='%Y-%m-%d'),
-        }
-
-
+# class ProfileEditForm(forms.ModelForm):
+#     class Meta:
+#         model = Profile
+#         fields = ('profPic', 'date_of_birth', 'phone_number')
+#         widgets ={
+#             'date_of_birth': DatePickerInput(format='%Y-%m-%d'),
+#         }
+class UserEditForm(UserChangeForm):
+    email = forms.CharField(widget=forms.TextInput(),required=True)
+    last_name = forms.CharField(widget=forms.TextInput())
+class ProfileEditForm(UserChangeForm):
+    profPic = forms.FileField(widget=forms.FileInput(),required=False)
+    date_of_birth = forms.DateTimeField(widget=forms.DateTimeInput())

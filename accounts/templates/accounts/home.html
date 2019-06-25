@@ -87,8 +87,6 @@
                         <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>Pricing is per {{ product.unitofsale }}</li>
                         <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>Category {{ product.category }}</li>
                         <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>{{ request.user.phoneNumber }} </li>
-{#                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> 16M colors</li>#}
-{#                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Octa-core 1.7 GHz Cortex-</li>#}
                     </ul>
                     <h4 class="text-primary">{{ product.price   }} </h4>
 
@@ -110,14 +108,12 @@
                     <br/>
                     <h5 class="text-primary">{{ order.title }}</h5>
                     <ul>
-                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>{{ order.location }}</li>
                         <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>{{ order.category }}</li>
+                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>{{ order.location }}</li>
                         <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> {{ order.period }}</li>
                         <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> {{ order.description }}</li>
-{#                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Quad 2.1GHz + Quad </li>#}
-{#                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Internal 32 GB </li>#}
                     </ul>
-{#                    <h4 class="text-primary">Rs. 49,900</h4>#}
+                    <h4 class="text-primary">Rs. 49,900</h4>
                     <a href="single_product.html" class="btn btn-success btn-block text-white">View</a>
                 </div>
             </div>
@@ -145,15 +141,15 @@
                         <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>{{ service.location}} </li>
                         <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> {{ service.description}}</li>
                         <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> {{ service.period }}</li>
-{#                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Fabric - Georgette</li>#}
-{#                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Care - Machine/Hand Wash</li>#}
+
                     </ul>
                     <h4 class="text-primary">{{ service.price }} </h4>
                     <a href="single_product.html" class="btn btn-success btn-block text-white">View</a>
                 </div>
-                {% endfor %}
+
             </div>
-{#            <h5><a href="#">More items</a></h5>#}
+                {% endfor %}
+            <h5><a href="#">More items</a></h5>
         </div>
 
         <!-- //latest job requests end -->

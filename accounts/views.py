@@ -64,21 +64,34 @@ def logout(request):
 @login_required
 def edit (request):
 
+#
+     if request.method == 'POST':
+         user_form = UserEditForm(instance= request.user, data = request.POST)
+         profile_form = ProfileEditForm (instance = request.user.profile, data = request.POST, files = request.FILES)
+         if user_form.is_valid() and profile_form.is_valid():
+             user_form.save()
+             profile_form.save()
+             messages.success(request, 'Your profile has been updated successfully')
+         else:
+             messages.error (request, 'Error updating your profile')
+     else:
+         user_form = UserEditForm(instance = request.user)
+         profile_form = ProfileEditForm(instance = request.user.profile)
+         return render(request, 'accounts/edit.html', {'user_form': user_form, 'profile_form': profile_form})
+@login_required
+# def edit(request):
+# 	if request.method == 'POST':
+#         form = UserEditForm(request.POST,instance=request.user)
+#         form2 = ProfileEditForm(request.POST, request.FILES, instance=request.user)
+# 		if form.is_valid():
+# 			form.save()
+# 			messages.success(request,('You have edited your profile'))
+# 			return redirect('home')
 
-    if request.method == 'POST':
-        user_form = UserEditForm(instance= request.user, data = request.POST)
-        profile_form = ProfileEditForm (instance = request.user.profile, data = request.POST, files = request.FILES)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            messages.success(request, 'Your profile has been updated successfully')
-        else:
-            messages.error (request, 'Error updating your profile')
-    else:
-        user_form = UserEditForm(instance = request.user)
-        profile_form = ProfileEditForm(instance = request.user.profile)
-        return render(request, 'accounts/edit.html', {'user_form': user_form, 'profile_form': profile_form})
-
+	# else:
+    #     form = UserEditForm(instance=request.user)
+    # context = {'form': form, 'form2':form2 }
+    # return render(request, 'accounts/edit.html', context)
 
 @login_required
 def viewProfile(request):

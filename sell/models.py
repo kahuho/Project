@@ -4,6 +4,21 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
 
 # model for the list of counties
+class Category(models.Model):
+    name = models.CharField(max_length=200, db_index=True)
+    slug = models.SlugField(max_length=200, db_index=True, unique=True)
+
+    class Meta:
+        ordering = ('name',)
+        verbose_name = 'category'
+        verbose_name_plural = 'categories'
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('shop:product_list_by_category', args=[self.slug])
+
 
 COUNTIES = (
                ('Baringo', 'BARINGO'),
@@ -92,11 +107,13 @@ class Products(models.Model):
 
     # category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     ProductName = models.CharField(max_length=255)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     ProductDescription = models.TextField(max_length=500, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     location = models.CharField(choices = COUNTIES, max_length=300, default='Nairobi')
     category = models.CharField( choices = CATEGORIES, max_length=10, default='other')
+    # category = models.ForeignKey(Category, related_name='products')
+
     unitofsale = models.CharField(max_length=10, choices=UNIT)
     image = models.FileField(upload_to='products_images/', blank=True)
     sublocation = models.CharField(max_length=100, default='Njoro')
@@ -118,7 +135,7 @@ class Growing(models.Model):
 
     # category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     ProductName = models.CharField(max_length=255)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     location = models.CharField(choices = COUNTIES, max_length=300, default='Nairobi')
     category = models.CharField( choices = CATEGORIES, max_length=10, default='other')

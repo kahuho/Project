@@ -1,6 +1,6 @@
 from . import views
 from django.conf.urls import url
-from sell.views import LatestProducts, LatestServices, Market, Orders_view, ProductDetailView, growing
+from sell.views import LatestProducts, LatestServices, Market, Orders_view, ProductDetailView, growing,Pdf
 from django.urls import path
 from sell.views import newsView, profile
 
@@ -18,5 +18,5 @@ urlpatterns = [
     path('single_product/<pk>/', views.ProductDetailView, name='single_product'),
     path('user_profile/<username>', views.profile, name='seller_profile'),
     path('growingForm/', views.growing, name='growingForm'),
-
+    path('render/pdf/', Pdf.as_view())
 ]

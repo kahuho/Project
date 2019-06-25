@@ -3,6 +3,10 @@
 # Create your views here.
 from django.views.generic import ListView, TemplateView
 from urllib3 import request
+from django.views.generic import View
+from django.utils import timezone
+from .render import Render
+
 from django.shortcuts import render, redirect,get_object_or_404
 from .models import Products, Orders, Services
 from .forms import ProductsForm, ServicesForm, OrdersForm, GrowingForm
@@ -22,8 +26,10 @@ def sell(request):
      if request.method == 'POST':
           form = ProductsForm(request.POST, request.FILES)
           if form.is_valid():
-              form.save(commit=False)
-              form.save()
+              form_instance = form.save(commit=False)
+              user = request.user
+              form_instance.user = user
+              form_instance.save()
 
 
               return redirect('home')
@@ -112,9 +118,10 @@ class LatestServices(ListView):
 class Market(ListView):
     context_object_name = 'market'
     template_name = 'sell/market.html'
-    # paginate_by = 12
+
+    paginate_by = 12
     # paginator = Paginator(context_object_name, 12)
-    # page = request.GET.get('page', 1)
+    # # page = request.GET.get('page')
     # try:
     #     products = paginator.page(page)
     # except PageNotAnInteger:
@@ -151,7 +158,7 @@ class Market(ListView):
 
 def LatestProducts(request):
     latesProducts = Products.objects.all()[:4]
-    orders = Products.objects.all()[:4]
+    orders = Orders.objects.all()[:4]
     services = Services.objects.all()[:4]
     return render(request, 'accounts/home.html',{'latestProducts':latesProducts, 'latestOrders':orders, 'services': services})
 
@@ -193,13 +200,29 @@ class newsView(TemplateView):
     template_name = 'sell/news.html'
 
 
+#     view to print pdfs
+class Pdf(View):
+
+    def get(self, request, ):
+        products = Products.objects.all()
+        today = timezone.now()
+        seller =Products.user
+        params = {
+            'today': today,
+            'products': products,
+            'request': request,
+            'seller': seller
+        }
+        return Render.render('sell/pdf.html', params)
 
 
 
 
+# view for user to see client profile
 def profile(request, username):
-    profile = User.objects.get(pk=username)
+    profile = User.objects.get(id=username)
     posts = Products.objects.filter(user=profile).count
+    print(profile)
 
     context = {'posts': posts, 'profile': profile}
     return render(request, 'accounts/profile.html', context)

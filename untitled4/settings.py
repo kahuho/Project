@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'accounts',
     'sell',
+    'xhtml2pdf',
     'crispy_forms',
     'social_django',
     'bootstrapform',
