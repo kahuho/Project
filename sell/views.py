@@ -8,7 +8,7 @@ from django.utils import timezone
 from .render import Render
 
 from django.shortcuts import render, redirect,get_object_or_404
-from .models import Products, Orders, Services
+from .models import Products, Orders, Services, Category
 from .forms import ProductsForm, ServicesForm, OrdersForm, GrowingForm
 from django.contrib.auth.decorators import login_required
 from django.views.generic.detail import DetailView
@@ -183,8 +183,8 @@ def ServiceDetailView(request, pk):
     service = get_object_or_404(Services, pk=pk)
     return render(request, 'sell/single_service.html', {'service': service})
 
-
-
+def CategoryView(request, pk):
+    produce = Category.objects.filter()
 
 def News():
     while True:

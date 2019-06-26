@@ -110,8 +110,8 @@
                     <ul>
                         <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>{{ order.category }}</li>
                         <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>{{ order.location }}</li>
-                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> {{ order.period }}</li>
-                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> {{ order.description }}</li>
+                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>Due Date: {{ order.period }}</li>
+{#                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> {{ order.description }}</li>#}
                     </ul>
                     <h4 class="text-primary">Rs. 49,900</h4>
                     <a href="{% url 'single_order' order.id %}" class="btn btn-success btn-block text-white">View</a>
@@ -138,9 +138,9 @@
                     <br/>
                     <h5 class="text-primary"> {{ service.title }}</h5>
                     <ul>
-                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>{{ service.location}} </li>
-                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> {{ service.description}}</li>
-                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> {{ service.period }}</li>
+                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>{{ service.location}}, {{ service.sublocation }} </li>
+{#                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> {{ service.description}}</li>#}
+                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>Due date: {{ service.period }}</li>
 
                     </ul>
                     <h4 class="text-primary">{{ service.price }} </h4>

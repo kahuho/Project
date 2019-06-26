@@ -16,8 +16,8 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse('shop:product_list_by_category', args=[self.slug])
+    # def get_absolute_url(self):
+    #     return reverse('shop:product_list_by_category', args=[self.slug])
 
 
 COUNTIES = (
@@ -110,13 +110,13 @@ class Products(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     ProductDescription = models.TextField(max_length=500, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    location = models.CharField(choices = COUNTIES, max_length=300, default='Nairobi')
-    category = models.CharField( choices = CATEGORIES, max_length=10, default='other')
-    # category = models.ForeignKey(Category, related_name='products')
+    location = models.CharField(choices = COUNTIES, max_length=300)
+    # category = models.CharField( choices = CATEGORIES, max_length=10, default='other')
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
 
     unitofsale = models.CharField(max_length=10, choices=UNIT)
     image = models.FileField(upload_to='products_images/', blank=True)
-    sublocation = models.CharField(max_length=100, default='Njoro')
+    sublocation = models.CharField(max_length=100)
     created= models.DateTimeField(auto_now_add=True)
     # slug = models.SlugField(max_length=200,db_index=True)
 
@@ -138,7 +138,7 @@ class Growing(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     location = models.CharField(choices = COUNTIES, max_length=300, default='Nairobi')
-    category = models.CharField( choices = CATEGORIES, max_length=10, default='other')
+    category = models.ForeignKey(Category, related_name='growingProducts', on_delete=models.CASCADE)
     image = models.FileField(upload_to='products_images/', blank=True)
     created= models.DateTimeField(auto_now_add=True)
     unitofsale = models.CharField(max_length=10, choices=UNIT)
@@ -159,18 +159,19 @@ class Services (models.Model):
     period = models.DateTimeField(auto_now=False)
     description = models.TextField(max_length=500)
     created = models.DateTimeField(auto_now_add=True )
+    sublocation = models.CharField(max_length=100)
 
 
 
 class Orders (models.Model):
-    category = models.CharField(choices= CATEGORIES, max_length=10, default='other' )
+    category = models.ForeignKey(Category, related_name='orders', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default="2")
     location = models.CharField(choices=COUNTIES, max_length=150, default='Nairobi')
     description = models.CharField(max_length=400)
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=50, default='other')
     period = models.DateTimeField(auto_now=False)
-    # slug = models.SlugField(max_length=200,db_index=True)
+    sublocation = models.CharField(max_length=100)
 
     class Meta:
         ordering = ('title',)

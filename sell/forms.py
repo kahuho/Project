@@ -1,10 +1,11 @@
 from django import forms
-from .models import Products, Services, Orders, Growing
+from .models import Products, Services, Orders, Growing,Category
 from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput, DateTimePickerInput, MonthPickerInput, YearPickerInput
 
 
 
 class ProductsForm(forms.ModelForm):
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label=None)
     class Meta:
         model = Products
         fields = ('ProductName', 'ProductDescription', 'price', 'location','sublocation', 'category', 'unitofsale','image')
@@ -20,6 +21,8 @@ class ProductsForm(forms.ModelForm):
             self.fields['category'].widget.attrs['class'] = 'form-control'
 
 class GrowingForm(forms.ModelForm):
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label=None)
+
     class Meta:
         model = Growing
         fields = ('ProductName', 'DescribeFarming', 'MaturityDate', 'price', 'location', 'sublocation', 'category', 'unitofsale', 'image')
@@ -41,7 +44,7 @@ class GrowingForm(forms.ModelForm):
 class ServicesForm(forms.ModelForm):
     class Meta:
         model = Services
-        fields = ('title','location', 'description', 'period')
+        fields = ('title','location', 'description', 'period', 'sublocation')
         widgets = {
             'period': DatePickerInput(format='%Y-%m-%d'),  # default date-format %m/%d/%Y will be used
         }
@@ -51,13 +54,18 @@ class ServicesForm(forms.ModelForm):
             self.fields['title'].widget.attrs['class'] = 'form-control'
             self.fields['location'].widget.attrs['class'] = 'form-control'
             self.fields['description'].widget.attrs['class'] = 'form-control'
+            self.fields['sublocation'].widget.attrs['class'] = 'form-control'
+
+
             self.fields['period'].widget.attrs['class'] = DatePickerInput()
 
 
 class OrdersForm (forms.ModelForm):
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label=None)
+
     class Meta:
         model = Orders
-        fields = ('title', 'category', 'description','period', 'location')
+        fields = ('title', 'category', 'description','period', 'location', 'sublocation')
         widgets = {
             'period': DatePickerInput(format='%Y-%m-%d'),  # default date-format %m/%d/%Y will be used
         }
@@ -68,6 +76,6 @@ class OrdersForm (forms.ModelForm):
         self.fields['category'].widget.attrs['class'] = 'form-control'
         self.fields['description'].widget.attrs['class'] = 'form-control'
         self.fields['location'].widget.attrs['class'] = 'form-control'
-        # self.fields['period'].widget.attrs['class'] = 'form-control'
+        self.fields['sublocation'].widget.attrs['class'] = 'form-control'
 
 
