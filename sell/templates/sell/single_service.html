@@ -1,0 +1,27 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block main %}
+<div class="row">
+                <div class="box col-md-4 col-md-offset-1   ">
+                    <div class="box-body text-center">
+                                        <div>
+                    <h2 class="text-primary">{{ service.title }} </h2>
+
+                    <h3>Service Details</h3>
+                    <p>{{ service.description }}</p>
+
+                    <div class="text-big4">Place: {{ service.location }}, {{ service.sublocation }}</div>
+                     <div class="text-big4">Due Date: {{ service.period }}</div>
+                                            <div class="text-big4">Contact: {{ service.period }}</div>
+
+
+                    <a href="{% url 'seller_profile' service.user.id %}" class="btn btn-primary btn-lg text-white">View Seller Profile</a>
+
+
+                </div>
+
+                    </div>
+                </div>
+</div>
+{% endblock %}

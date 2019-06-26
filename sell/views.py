@@ -38,6 +38,7 @@ def sell(request):
          form = ProductsForm()
          return render(request, 'sell/products_form.html', {'form': form})
 #      view for form to sell growing produce
+@login_required
 def growing(request):
     if request.method =='POST':
         form = GrowingForm(request.POST, request.FILES)
@@ -91,6 +92,12 @@ class Orders_view(ListView):
     template_name = 'sell/orders.html'
     def get_queryset(self):
         return Orders.objects.all()[:4]
+
+    def get_context_data(self, **kwargs):
+        orders = super().get_context_data(**kwargs)
+
+        orders['now'] = timezone.now()
+        return orders
 # view for new orders in home page
 
 class LatestOrders(ListView):
@@ -162,17 +169,19 @@ def LatestProducts(request):
     services = Services.objects.all()[:4]
     return render(request, 'accounts/home.html',{'latestProducts':latesProducts, 'latestOrders':orders, 'services': services})
 
-
+# Detailed view for single product
 def ProductDetailView(request, pk):
     product = get_object_or_404(Products, pk=pk)
 
 
     return render(request, 'sell/single_product.html', {'product': product})
-
-# Detailed view for a single product
-# class ProductDetailView(DetailView):
-#     model = Products
-#     template_name = 'sell/single_product.html'
+# view for seeing a single order details
+def OrderDetailView(request, pk):
+    order = get_object_or_404(Orders, pk=pk)
+    return render (request, 'sell/single_order.html', {'order': order})
+def ServiceDetailView(request, pk):
+    service = get_object_or_404(Services, pk=pk)
+    return render(request, 'sell/single_service.html', {'service': service})
 
 
 
@@ -184,8 +193,8 @@ def News():
         agric_articles = newsapi.get_everything(q='agriculture',
 
                                                 # domains='bbc.co.uk,techcrunch.com',
-                                                from_param='2019-04-25',
-                                                to='2019-04-05',
+                                                from_param='2019-05-25',
+                                                to='2019-06-25',
                                                 # category = 'science, technology',
                                                 language='en',
                                                 )

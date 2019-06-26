@@ -13,29 +13,102 @@
 
 
 
-<div class="row">
 <div class="container">
 <h2> Please Fill in details of your product using the following form</h2>
 
 
 
-    <div class="col col-md-4 col-md-offset-4">
+    <div >
         <form method="post" action="{% url  'sell' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="row">
-                {{  form.price }}
+            <div class="row col-md-10">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        {{  form.ProductName}}
+
+                    </div>
 
 
-            </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Product Price</label>
+                        {{ form.price }}
+                    </div>
+                    </div>
+                </div>
+                        <div class="row col-md-10">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>County</label>
+                        {{  form.location}}
+
+                    </div>
+
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Sub-location</label>
+                        {{ form.sublocation }}
+                    </div>
+                    </div>
+                </div>
+                        <div class="row col-md-10">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Category</label>
+                        {{  form.category}}
+
+                    </div>
+
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Unit of Sale</label>
+                        {{ form.unitofsale }}
+                    </div>
+                    </div>
+                </div>
+                        <div class="row col-md-10">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Product Description</label>
+                        {{  form.ProductDescription}}
+
+                    </div>
+
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Upload Product Image</label>
+                        {{ form.image }}
+                    </div>
+                    </div>
+                </div>
+                        <div class="row col-md-10">
+                <div class="col-md-6">
+                    <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-lg mt-5"> Sell </button>
+
+                    </div>
+
+
+                </div>
+                </div>
+
+
             <br>
 
-            <button type="submit" class="btn btn-success mt-5"> Sell </button>
 {#            <input type="submit" value="Sell">#}
         </form>
     </div>
 
 </div>
-</div>
+
 
 
 

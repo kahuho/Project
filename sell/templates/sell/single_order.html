@@ -1,0 +1,25 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block main %}
+<div class="row">
+                <div class="box col-md-4 col-md-offset-1   ">
+                    <div class="box-body text-center">
+                                        <div>
+                    <h2 class="text-primary">{{ order.title }} </h2>
+
+                    <h3>Order Details</h3>
+                    <p>{{ order.description }}</p>
+
+                    <div class="text-big4">Price: {{ order.location }}</div>
+                     <div class="text-big4">Contact: {{ order.user.profile.phone_number }}</div>
+
+                    <a href="{% url 'seller_profile' order.user.id %}" class="btn btn-primary btn-lg text-white">View Seller Profile</a>
+
+
+                </div>
+
+                    </div>
+                </div>
+</div>
+{% endblock %}

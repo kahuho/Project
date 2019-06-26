@@ -15,13 +15,14 @@ class ProductsForm(forms.ModelForm):
             self.fields['ProductDescription'].widget.attrs['class'] = 'form-control'
             self.fields['price'].widget.attrs['class'] = 'form-control'
             self.fields['location'].widget.attrs['class'] = 'form-control'
+            self.fields['sublocation'].widget.attrs['class'] = 'form-control'
             self.fields['unitofsale'].widget.attrs['class'] = 'form-control'
             self.fields['category'].widget.attrs['class'] = 'form-control'
 
 class GrowingForm(forms.ModelForm):
     class Meta:
         model = Growing
-        fields = ('ProductName', 'DescribeFarming', 'MaturityDate', 'price', 'location', 'category', 'unitofsale', 'image')
+        fields = ('ProductName', 'DescribeFarming', 'MaturityDate', 'price', 'location', 'sublocation', 'category', 'unitofsale', 'image')
         widgets= {
             'MaturityDate': DatePickerInput(format='%Y-%m-%d'),
         }
@@ -32,6 +33,7 @@ class GrowingForm(forms.ModelForm):
         self.fields['MaturityDate'].widget.attrs['class'] = 'form-control'
         self.fields['price'].widget.attrs['class'] = 'form-control'
         self.fields['location'].widget.attrs['class'] = 'form-control'
+        self.fields['sublocation'].widget.attrs['class'] = 'form-control'
         self.fields['unitofsale'].widget.attrs['class'] = 'form-control'
         self.fields['category'].widget.attrs['class'] = 'form-control'
 

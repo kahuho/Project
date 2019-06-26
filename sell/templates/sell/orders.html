@@ -1,4 +1,4 @@
-{% extends 'accounts/base.html' %}
+{% extends 'accounts/base.html' %}#}
 {% load static %}
 {% block main %}
         <div class="row">
@@ -17,7 +17,7 @@
 {#                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Internal 32 GB </li>#}
                     </ul>
 {#                    <h4 class="text-primary">Rs. 49,900</h4>#}
-                    <a href="single_product.html" class="btn btn-success btn-block text-white">View</a>
+                    <a href="{% url 'single_order' order.id %}" class="btn btn-success btn-block text-white">View</a>
                 </div>
             </div>
             {% endfor %}

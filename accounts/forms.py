@@ -46,8 +46,22 @@ class UserRegistrationForm(UserCreationForm):
 #             'date_of_birth': DatePickerInput(format='%Y-%m-%d'),
 #         }
 class UserEditForm(UserChangeForm):
-    email = forms.CharField(widget=forms.TextInput(),required=True)
-    last_name = forms.CharField(widget=forms.TextInput())
+    # email = forms.CharField(widget=forms.TextInput(),required=True)
+    # last_name = forms.CharField(widget=forms.TextInput())
+    #
+    class Meta:
+        model = User
+        fields = {
+            'email',
+            'last_name'
+        }
+
 class ProfileEditForm(UserChangeForm):
-    profPic = forms.FileField(widget=forms.FileInput(),required=False)
-    date_of_birth = forms.DateTimeField(widget=forms.DateTimeInput())
+    class Meta:
+        model = Profile
+        fields ={
+            'profPic',
+            'date_of_birth'
+        }
+    # profPic = forms.FileField(widget=forms.FileInput(),required=False)
+    # date_of_birth = forms.DateTimeField(widget=forms.DateTimeInput())

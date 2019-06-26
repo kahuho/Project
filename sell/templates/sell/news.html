@@ -14,16 +14,22 @@
     <div class="box-body">
         <div class="row">
             <div class="col-sm-8">
-                       <h3> <b>[[record.title]]</b></h3>
 
-            <h3>Content: [[record.content]]</h3>
-            <a :href="record.url" target="_blank"> <h3>Description: [[record.description]]</h3></a>
-            <h3>Published at: [[record.publishedAt]]</h3>
+                <div class="row col-md-offset-0">
+                    <strong class="pull-left"> <a :href="record.url" target="_blank" style="color: blue">[[record.title]]</a></strong>
+            <strong class="pull-right">Published at:   [[ getSweetDate(record.publishedAt)]]</strong>
+
+                </div>
+
+                <hr>
+
+                <p class="pull-left"><b>Content:</b> [[record.content]]</p>
+                <p class="pull-left"><b>Description:</b> [[record.description]]</p>
                            <br>
                 <div class="row">
-                                <div class="col-sm-8"> <h1 class="pull-left">[[ record.author ]]</h1></div>
+                                <div class="col-sm-8"> <h4 class="pull-left">[[ record.author ]]</h4></div>
                                 <div class="col-sm-4 ">
-            <h3> [[record.source.name]]</h3>
+            <h4><strong>Source: </strong> [[record.source.name]]</h4>
 
                                       <a :href="record.url" target="_blank" class="btn btn-success" >Link</a>
                                 </div>
@@ -32,7 +38,7 @@
             </div>
 
             <div class="col-sm-4">
-                <img  :src="[[record.urlToImage]]" class="img img-responsive"  style="height: 450px; width: 500px "/>
+                <img  :src="[[record.urlToImage]]" class="img img-responsive"  style="height: 250px; width: 500px "/>
 
             </div>
         </div>
@@ -51,7 +57,7 @@
 {% block script %}
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script type="text/javascript" src="{% static "js/jquery.min.js"%}"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
     <script type="application/javascript" >
         var content=new Vue({
             el:'#content',
@@ -63,7 +69,7 @@
 
                 var me=this;
         $.ajax({
-            url:"https://newsapi.org/v2/everything?q=agriculture&from=2019-05-23&to=2019-05-23&sortBy=popularity&apiKey=7afe78e453a64e3ca55b795fdf8f0f04",
+            url:"https://newsapi.org/v2/everything?q=agriculture&from=2019-06-01&to=2019-06-24&sortBy=popularity&apiKey=7afe78e453a64e3ca55b795fdf8f0f04",
             success:function (results) {
                 me.news=results.articles;
                 console.log(results.articles)
@@ -71,7 +77,7 @@
                // $.each(results.articles,function (key,value) {
                  //                   console.log(value.author);
 //
-  //                  if (key==9){
+  //                  if (key==9){getD
     //                   return false;
       //              }
         //        })
@@ -83,7 +89,12 @@
         })
             },
             methods:{
+                getSweetDate:function(hehe){
 
+                    var dateTime = new Date(hehe);
+dateTime = moment(dateTime).format("MMM DD YYYY hh:mm:ss");
+return dateTime;
+                }
             }
 
         });

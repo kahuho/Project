@@ -118,11 +118,11 @@ class Products(models.Model):
     image = models.FileField(upload_to='products_images/', blank=True)
     sublocation = models.CharField(max_length=100, default='Njoro')
     created= models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField(max_length=200,db_index=True)
+    # slug = models.SlugField(max_length=200,db_index=True)
 
     class Meta:
         ordering = ('-created',)
-        index_together = (('id', 'slug'),)
+        # index_together = (('id', 'slug'),)
 
 # Growing produce model
 class Growing(models.Model):
@@ -170,8 +170,18 @@ class Orders (models.Model):
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=50, default='other')
     period = models.DateTimeField(auto_now=False)
+    # slug = models.SlugField(max_length=200,db_index=True)
 
+    class Meta:
+        ordering = ('title',)
+        verbose_name = 'order'
+        verbose_name_plural = 'orders'
 
+    def __str__(self):
+        return self.title
+
+    # def get_absolute_url(self):
+    #     return reverse('shop:product_list_by_category', args=[self.slug])
 
 
 from django.db import models
